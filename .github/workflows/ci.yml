@@ -1,0 +1,80 @@
+# .github/workflows/ci.yml
+name: CI Pipeline
+
+# Eventos que disparan el workflow (A.2)
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # JOB 1: Linting (A.2)
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Versión fija para lint
+          cache: 'npm'       # B.2: Cache de dependencias
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Linter
+        run: npm run lint
+
+  # JOB 2: Testing con Matrix Strategy (B.1) y Cache (B.2)
+  test:
+    name: Test on Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]   # B.1: Prueba con Node 18 y 20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'            # B.2: Cache de dependencias
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm test             # Esto ejecuta 'jest --coverage'
+
+  # JOB 3: Build (simulado) (A.2)
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    # Este job depende de que 'test' y 'lint' hayan terminado con éxito
+    needs: [lint, test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Simulate build step
+        run: |
+          echo "Build started..."
+          # Aquí iría, por ejemplo, 'npm run build' si fuera una app frontend
+          mkdir dist
+          cp src/*.js dist/
+          echo "Build finished. Files copied to /dist"

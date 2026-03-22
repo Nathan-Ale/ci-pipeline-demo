@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1774220721979" clover="3.2.0">
+  <project timestamp="1774220721980" name="All files">
+    <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3" elements="14" coveredelements="14" complexity="0" loc="9" ncloc="9" packages="1" files="1" classes="1"/>
+    <file name="mathUtils.js" path="C:\Users\Jonnathan Alegria\Desktop\CEUTEC\SISTEMAS OPERATIVOS\SEMANA 8\Tarea6\ci-pipeline-demo\src\mathUtils.js">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="8" count="2" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="2" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+      <line num="29" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="30" count="1" type="stmt"/>
+      <line num="32" count="2" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
