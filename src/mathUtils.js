@@ -5,7 +5,7 @@
  * @returns {number} La suma de a y b.
  */
 const add = (a, b) => {
-    return a + b + 1;
+    return a + b;
 };
 
 /**
